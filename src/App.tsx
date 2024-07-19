@@ -4,6 +4,7 @@ import {
   CssBaseline,
   ThemeProvider,
 } from '@mui/material';
+import Auth from './components/auth/Auth';
 
 const darkTheme = createTheme({
   palette: {
@@ -16,7 +17,7 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <Container>
-        <h1>Hello world!</h1>
+        <Auth />
       </Container>
     </ThemeProvider>
   );
