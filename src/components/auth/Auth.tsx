@@ -1,7 +1,13 @@
 import { Button, Stack, TextField } from '@mui/material';
 import { useState } from 'react';
 
-const Auth = () => {
+interface AuthProps {
+  submitLabel: string;
+  onSubmit: (credentials: { email: string; password: string }) => Promise<void>;
+  children: React.ReactNode;
+}
+
+const Auth = ({ submitLabel, onSubmit, children }: AuthProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   return (
@@ -32,7 +38,10 @@ const Auth = () => {
         onChange={(event) => setPassword(event.target.value)}
       />
 
-      <Button variant="contained">Login</Button>
+      <Button variant="contained" onClick={() => onSubmit({ email, password })}>
+        {submitLabel}
+      </Button>
+      {children}
     </Stack>
   );
 };
