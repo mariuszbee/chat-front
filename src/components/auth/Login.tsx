@@ -6,7 +6,11 @@ import { useLogin } from '../../hooks/useLogin';
 export const Login = () => {
   const { error, login } = useLogin();
   return (
-    <Auth submitLabel="Login" onSubmit={(reqest) => login(reqest)}>
+    <Auth
+      submitLabel="Login"
+      onSubmit={(reqest) => login(reqest)}
+      error={error ? 'Invalid email or password' : ''}
+    >
       <Link to="/signup" style={{ alignSelf: 'center' }}>
         <MUILink>Don't have an account? Signup</MUILink>
       </Link>
