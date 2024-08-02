@@ -9,7 +9,7 @@ export const Login = () => {
     <Auth
       submitLabel="Login"
       onSubmit={(reqest) => login(reqest)}
-      error={error ? 'Invalid email or password' : ''}
+      error={error}
     >
       <Link to="/signup" style={{ alignSelf: 'center' }}>
         <MUILink>Don't have an account? Signup</MUILink>

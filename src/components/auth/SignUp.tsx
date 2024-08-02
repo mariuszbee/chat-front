@@ -27,7 +27,9 @@ export const SignUp = () => {
           const errorMessage = extractErrorMessage(error);
           if (errorMessage) {
             setError(errorMessage);
+            return;
           }
+          setError('Unknown error occurred. Please try again.');
         }
       }}
     >
