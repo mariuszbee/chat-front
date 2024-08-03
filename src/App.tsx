@@ -30,21 +30,31 @@ function App() {
         <CssBaseline />
         <Header />
         <Guard>
-          <Grid container>
-            <Grid item md={3}>
-              <ChatList />
+          {path === '/' ? (
+            <Grid container>
+              <Grid item md={3}>
+                <ChatList />
+              </Grid>
+              <Grid item md={9}>
+                <Routes />
+              </Grid>
             </Grid>
-            <Grid item md={9}>
-              <Container>
-                <RouterProvider router={router} />
-              </Container>
-            </Grid>
-          </Grid>
+          ) : (
+            <Routes />
+          )}
         </Guard>
         <Snackbar />
       </ThemeProvider>
     </ApolloProvider>
   );
 }
+
+const Routes = () => {
+  return (
+    <Container>
+      <RouterProvider router={router} />
+    </Container>
+  );
+};
 
 export default App;
