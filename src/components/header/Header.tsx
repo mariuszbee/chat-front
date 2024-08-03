@@ -6,25 +6,45 @@ import { MobileMenu } from './MobileMenu';
 import { TypographyBrand } from './TypographyBrand';
 import { Navigation } from './Navigation';
 import { UserSettingsNav } from './UserSettingsNav';
+import { useReactiveVar } from '@apollo/client';
+import { authenticatedVar } from '../../constants/authenticated';
+import { Page } from '../../interfaces/page.interface';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages: Page[] = [
+  {
+    name: 'Home',
+    path: '/',
+  },
+];
+
+const unauthenticatedPages: Page[] = [
+  {
+    name: 'Login',
+    path: '/login',
+  },
+  {
+    name: 'Signup',
+    path: '/signup',
+  },
+];
 
 const Header = () => {
+  const authenticated = useReactiveVar(authenticatedVar);
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Brand displaySize={{ xs: 'none', md: 'flex' }} />
           <TypographyBrand displaySize={{ xs: 'none', md: 'flex' }} />
-          <MobileMenu pages={pages} />
-          <Navigation pages={pages} />
+          <MobileMenu pages={authenticated ? pages : unauthenticatedPages} />
+          <Navigation pages={authenticated ? pages : unauthenticatedPages} />
           <Brand displaySize={{ xs: 'flex', md: 'none' }} />
           <TypographyBrand
             displaySize={{ xs: 'flex', md: 'none' }}
             flexGrow={1}
           />
-
-          <UserSettingsNav />
+          {authenticated && <UserSettingsNav />}
         </Toolbar>
       </Container>
     </AppBar>
