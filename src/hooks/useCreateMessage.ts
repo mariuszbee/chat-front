@@ -12,5 +12,5 @@ const createMessageDocument = graphql(`
 `);
 
 export const useCreateMessage = () => {
-  useMutation(createMessageDocument);
+  return useMutation(createMessageDocument);
 };
