@@ -62,7 +62,6 @@ export const ChatListAdd = ({ isOpen, handleClose }: ChatListAddProps) => {
               }}
               control={
                 <Switch
-                  defaultChecked
                   value={isPrivate}
                   onChange={(event) => setIsPrivate(event.target.checked)}
                 />
