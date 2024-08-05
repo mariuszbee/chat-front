@@ -14,6 +14,8 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
+  DateTime: { input: any; output: any; }
 };
 
 export type Chat = {
@@ -31,14 +33,28 @@ export type CreateChatInput = {
   userIds?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
+export type CreateMessageInput = {
+  chatId: Scalars['String']['input'];
+  content: Scalars['String']['input'];
+};
+
 export type CreateUserInput = {
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
 };
 
+export type Message = {
+  __typename?: 'Message';
+  _id: Scalars['ID']['output'];
+  content: Scalars['String']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  userId: Scalars['String']['output'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createChat: Chat;
+  createMessage: Message;
   createUser: User;
   removeChat: Chat;
   removeUser: User;
@@ -49,6 +65,11 @@ export type Mutation = {
 
 export type MutationCreateChatArgs = {
   createChatInput: CreateChatInput;
+};
+
+
+export type MutationCreateMessageArgs = {
+  createMessageInput: CreateMessageInput;
 };
 
 
@@ -76,6 +97,7 @@ export type Query = {
   chat: Chat;
   chats: Array<Chat>;
   me: User;
+  messages: Array<Message>;
   user: User;
   users: Array<User>;
 };
@@ -83,6 +105,11 @@ export type Query = {
 
 export type QueryChatArgs = {
   _id: Scalars['String']['input'];
+};
+
+
+export type QueryMessagesArgs = {
+  chatId: Scalars['String']['input'];
 };
 
 
