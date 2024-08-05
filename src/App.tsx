@@ -52,7 +52,7 @@ function App() {
 
 const Routes = () => {
   return (
-    <Container>
+    <Container sx={{ height: '100%' }}>
       <RouterProvider router={router} />
     </Container>
   );
