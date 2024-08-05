@@ -92,8 +92,8 @@ export const ChatListAdd = ({ isOpen, handleClose }: ChatListAddProps) => {
           <Button
             variant="outlined"
             fullWidth
-            onClick={() => {
-              createChat({
+            onClick={async () => {
+              await createChat({
                 variables: {
                   createChatInput: {
                     isPrivate,
@@ -101,6 +101,7 @@ export const ChatListAdd = ({ isOpen, handleClose }: ChatListAddProps) => {
                   },
                 },
               });
+              handleClose();
             }}
           >
             Save
