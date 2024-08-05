@@ -6,7 +6,11 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 
-export const CHatListItem = () => {
+interface ChatListItemProps {
+  name?: string | null;
+}
+
+export const CHatListItem = ({ name }: ChatListItemProps) => {
   return (
     <>
       <ListItem alignItems="flex-start">
@@ -14,7 +18,7 @@ export const CHatListItem = () => {
           <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
         </ListItemAvatar>
         <ListItemText
-          primary="Brunch this weekend?"
+          primary={name}
           secondary={
             <React.Fragment>
               <Typography
