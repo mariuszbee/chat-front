@@ -23,12 +23,12 @@ export const ChatList = () => {
             width: '100%',
             maxWidth: 360,
             bgcolor: 'background.paper',
-            maxHeight: '90vh',
+            maxHeight: '80vh',
             overflow: 'auto',
           }}
         >
           {data?.chats.map((chat) => (
-            <CHatListItem key={chat._id} name={chat.name} />
+            <CHatListItem key={chat._id} chat={chat} />
           ))}
         </List>
       </Stack>
