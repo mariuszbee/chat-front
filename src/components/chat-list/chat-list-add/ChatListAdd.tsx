@@ -28,8 +28,16 @@ export const ChatListAdd = ({ isOpen, handleClose }: ChatListAddProps) => {
   const [error, setError] = useState('');
   const [chatName, setChatName] = useState('');
   const [createChat] = useCreateChat();
+
+  const onClose = () => {
+    setError('');
+    setChatName('');
+    setIsPrivate(false);
+    handleClose();
+  };
+
   return (
-    <Modal open={isOpen} onClose={handleClose}>
+    <Modal open={isOpen} onClose={onClose}>
       <Box
         sx={{
           position: 'absolute',
@@ -110,11 +118,10 @@ export const ChatListAdd = ({ isOpen, handleClose }: ChatListAddProps) => {
                     },
                   },
                 });
+                onClose();
               } catch (error) {
                 setError(UNKNOW_ERROR_MESSAGE);
               }
-
-              handleClose();
             }}
           >
             Save
