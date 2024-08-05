@@ -30,15 +30,6 @@ export const ChatList = () => {
           {data?.chats.map((chat) => (
             <CHatListItem key={chat._id} name={chat.name} />
           ))}
-          <CHatListItem />
-          <CHatListItem />
-          <CHatListItem />
-          <CHatListItem />
-          <CHatListItem />
-          <CHatListItem />
-          <CHatListItem />
-          <CHatListItem />
-          <CHatListItem />
         </List>
       </Stack>
     </>
