@@ -20,6 +20,18 @@ export const Chat = () => {
   const [createMessage] = useCreateMessage(params._id!);
   const { data: messages } = useGetMessages({ chatId: params._id! });
 
+  const handleCreateMessage = async () => {
+    await createMessage({
+      variables: {
+        createMessageInput: {
+          content: message,
+          chatId: params._id!,
+        },
+      },
+    });
+    setMessage('');
+  };
+
   return (
     <Stack
       sx={{
@@ -53,21 +65,17 @@ export const Chat = () => {
           placeholder="Type a message"
           onChange={(event) => setMessage(event.target.value)}
           value={message}
+          onKeyDown={async (event) => {
+            if (event.key === 'Enter') {
+              await handleCreateMessage();
+            }
+          }}
         />
         <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
         <IconButton
           color="primary"
           sx={{ p: '10px' }}
-          onClick={() => {
-            createMessage({
-              variables: {
-                createMessageInput: {
-                  content: message,
-                  chatId: params._id!,
-                },
-              },
-            });
-          }}
+          onClick={handleCreateMessage}
         >
           <SendIcon />
         </IconButton>
