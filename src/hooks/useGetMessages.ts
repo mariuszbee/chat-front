@@ -5,9 +5,7 @@ import { MessagesQueryVariables } from '../gql/graphql';
 export const getMessagesDocument = graphql(`
   query Messages($chatId: String!) {
     messages(chatId: $chatId) {
-      _id
-      content
-      createdAt
+      ...MessageFragment
     }
   }
 `);

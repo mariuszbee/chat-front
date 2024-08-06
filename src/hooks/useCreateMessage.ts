@@ -5,9 +5,7 @@ import { getMessagesDocument } from './useGetMessages';
 const createMessageDocument = graphql(`
   mutation CreateMessage($createMessageInput: CreateMessageInput!) {
     createMessage(createMessageInput: $createMessageInput) {
-      _id
-      content
-      createdAt
+      ...MessageFragment
     }
   }
 `);
