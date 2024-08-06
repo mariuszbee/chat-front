@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useGetChat } from '../../hooks/useGetChat';
 import {
   Avatar,
@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import { useCreateMessage } from '../../hooks/useCreateMessage';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useGetMessages } from '../../hooks/useGetMessages';
 import Typography from '@mui/material/Typography';
 
@@ -22,6 +22,17 @@ export const Chat = () => {
   const { data } = useGetChat({ _id: params._id! });
   const [createMessage] = useCreateMessage(params._id!);
   const { data: messages } = useGetMessages({ chatId: params._id! });
+  const divRef = useRef<HTMLDivElement | null>(null);
+  const location = useLocation();
+
+  const scrollToBottom = () => {
+    divRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    setMessage('');
+    scrollToBottom();
+  }, [location]);
 
   const handleCreateMessage = async () => {
     await createMessage({
@@ -33,6 +44,7 @@ export const Chat = () => {
       },
     });
     setMessage('');
+    scrollToBottom();
   };
 
   return (
@@ -45,7 +57,7 @@ export const Chat = () => {
       }}
     >
       <h1>{data?.chat.name}</h1>
-      <Box>
+      <Box sx={{ maxHeight: '70vh', overflow: 'auto' }}>
         {messages?.messages.map((message) => (
           <Grid container alignItems="center" marginBottom="1rem">
             <Grid item xs={3} md={1}>
@@ -69,6 +81,7 @@ export const Chat = () => {
             </Grid>
           </Grid>
         ))}
+        <div ref={divRef}></div>
       </Box>
       <Paper
         sx={{
