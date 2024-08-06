@@ -1,8 +1,10 @@
 import { useParams } from 'react-router-dom';
 import { useGetChat } from '../../hooks/useGetChat';
 import {
+  Avatar,
   Box,
   Divider,
+  Grid,
   IconButton,
   InputBase,
   Paper,
@@ -12,6 +14,7 @@ import SendIcon from '@mui/icons-material/Send';
 import { useCreateMessage } from '../../hooks/useCreateMessage';
 import { useState } from 'react';
 import { useGetMessages } from '../../hooks/useGetMessages';
+import Typography from '@mui/material/Typography';
 
 export const Chat = () => {
   const params = useParams();
@@ -44,7 +47,27 @@ export const Chat = () => {
       <h1>{data?.chat.name}</h1>
       <Box>
         {messages?.messages.map((message) => (
-          <p key={message._id}>{message.content}</p>
+          <Grid container alignItems="center" marginBottom="1rem">
+            <Grid item xs={3} md={1}>
+              <Avatar src="" sx={{ width: 52, height: 52 }} />
+            </Grid>
+            <Grid item xs={9} md={11}>
+              <Stack>
+                <Paper sx={{ width: 'fit-content' }}>
+                  <Typography sx={{ padding: '0.9rem' }}>
+                    {message.content}
+                  </Typography>
+                </Paper>
+                <Typography
+                  variant="caption"
+                  color="textSecondary"
+                  sx={{ marginLeft: '0.25rem' }}
+                >
+                  {new Date(message.createdAt).toLocaleTimeString()}
+                </Typography>
+              </Stack>
+            </Grid>
+          </Grid>
         ))}
       </Box>
       <Paper
