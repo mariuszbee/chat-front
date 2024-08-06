@@ -1,8 +1,10 @@
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
-import { API_URL } from './urls';
+import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
+import { API_URL, WS_URL } from './urls';
 import { excludedRoutes } from './excluded-routes';
 import { onLogout } from '../utils/logout';
+import { createClient } from 'graphql-ws';
 
 const logOutLink = onError((error) => {
   if (
@@ -16,6 +18,12 @@ const logOutLink = onError((error) => {
 });
 
 const httpLink = new HttpLink({ uri: `${API_URL}/graphql` });
+
+const wsLink = new GraphQLWsLink(
+  createClient({
+    url: `ws://${WS_URL}/graphql`,
+  })
+);
 
 export const client = new ApolloClient({
   cache: new InMemoryCache(),
