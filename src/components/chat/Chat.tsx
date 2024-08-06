@@ -15,6 +15,7 @@ import { useCreateMessage } from '../../hooks/useCreateMessage';
 import { useEffect, useRef, useState } from 'react';
 import { useGetMessages } from '../../hooks/useGetMessages';
 import Typography from '@mui/material/Typography';
+import { useMessageCreated } from '../../hooks/useMessageCreated';
 
 export const Chat = () => {
   const params = useParams();
@@ -24,6 +25,9 @@ export const Chat = () => {
   const { data: messages } = useGetMessages({ chatId: params._id! });
   const divRef = useRef<HTMLDivElement | null>(null);
   const location = useLocation();
+  const { data: latestMessage } = useMessageCreated({ chatId: params._id! });
+
+  console.log(latestMessage);
 
   const scrollToBottom = () => {
     divRef.current?.scrollIntoView({ behavior: 'smooth' });

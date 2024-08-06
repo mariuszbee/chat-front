@@ -10,7 +10,8 @@ import { getMainDefinition } from '@apollo/client/utilities';
 const logOutLink = onError((error) => {
   if (
     error.graphQLErrors?.length &&
-    (error.graphQLErrors[0].extensions?.originalError as any).statusCode === 401
+    (error.graphQLErrors[0].extensions?.originalError as any)?.statusCode ===
+      401
   ) {
     if (!excludedRoutes.includes(window.location.pathname)) {
       onLogout();
