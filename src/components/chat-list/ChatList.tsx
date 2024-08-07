@@ -6,12 +6,16 @@ import { ChatListHeader } from './chat-list-header/ChatListHeader';
 import { ChatListAdd } from './chat-list-add/ChatListAdd';
 import { useGetChats } from '../../hooks/useGetChats';
 import { usePath } from '../../hooks/usePath';
+import { useMessageCreated } from '../../hooks/useMessageCreated';
 
 export const ChatList = () => {
   const [chatAddVisible, setChatAddVisible] = useState(false);
   const [selectedChatId, setSelectedChatId] = useState('');
   const { data } = useGetChats();
   const { path } = usePath();
+
+  useMessageCreated({ chatIds: data?.chats.map((chat) => chat._id) || [] });
+  console.log(data);
 
   useEffect(() => {
     const pathSplit = path.split('chat/');
