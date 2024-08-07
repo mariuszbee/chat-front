@@ -35,9 +35,9 @@ export const CHatListItem = ({ chat, selected }: ChatListItemProps) => {
                   variant="body2"
                   color="text.primary"
                 >
-                  Ali Connors
+                  {chat.latestMessage?.user.username || ''}
                 </Typography>
-                {" — I'll be in your neighborhood doing errands this…"}
+                {' ' + (chat.latestMessage?.content || '')}
               </React.Fragment>
             }
           />
