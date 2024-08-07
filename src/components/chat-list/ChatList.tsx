@@ -41,15 +41,25 @@ export const ChatList = () => {
             overflow: 'auto',
           }}
         >
-          {data?.chats
-            .map((chat) => (
-              <CHatListItem
-                key={chat._id}
-                chat={chat}
-                selected={chat._id === selectedChatId}
-              />
-            ))
-            .reverse()}
+          {data?.chats &&
+            [...data.chats]
+              .sort((chatA, chatB) => {
+                if (!chatA.latestMessage) {
+                  return -1;
+                }
+                return (
+                  new Date(chatA.latestMessage?.createdAt).getTime() -
+                  new Date(chatB.latestMessage?.createdAt).getTime()
+                );
+              })
+              .map((chat) => (
+                <CHatListItem
+                  key={chat._id}
+                  chat={chat}
+                  selected={chat._id === selectedChatId}
+                />
+              ))
+              .reverse()}
         </List>
       </Stack>
     </>
