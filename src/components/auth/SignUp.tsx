@@ -8,7 +8,7 @@ import { useLogin } from '../../hooks/useLogin';
 
 export const SignUp = () => {
   const [createUser] = useCreateUser();
-  const [userName, setUserName] = useState('');
+  const [username, setUsername] = useState('');
   const [error, setError] = useState('');
   const { login } = useLogin();
 
@@ -21,8 +21,8 @@ export const SignUp = () => {
           type="text"
           label="Username"
           variant="outlined"
-          value={userName}
-          onChange={(event) => setUserName(event.target.value)}
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
           error={!!error}
           helperText={error}
         />,
@@ -33,6 +33,7 @@ export const SignUp = () => {
             variables: {
               createUserInput: {
                 email,
+                username,
                 password,
               },
             },
