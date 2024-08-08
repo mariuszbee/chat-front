@@ -114,7 +114,8 @@ export const Chat = () => {
                         color="textSecondary"
                         sx={{ marginLeft: '0.25rem' }}
                       >
-                        {new Date(message.createdAt).toLocaleTimeString()}
+                        {new Date(message.createdAt).toLocaleTimeString()} -
+                        {new Date(message.createdAt).toLocaleDateString()}
                       </Typography>
                     </Stack>
                   </Grid>
