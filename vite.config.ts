@@ -11,22 +11,27 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
-      '/auth/': {
+
+      '/auth': {
         target: 'http://localhost:3000',
         changeOrigin: true,
         secure: false,
       },
-      // '/chat/**': {
-      //   target: 'http://localhost:3000',
-      //   changeOrigin: true,
-      //   secure: false,
-      // },
-
-      // '/auth/signup': {
-      //   target: 'http://localhost:3000',
-      //   changeOrigin: true,
-      //   secure: false,
-      // },
+      '/chats': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/chats/_id': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/messages': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        secure: false,
+      },
     },
   },
 });

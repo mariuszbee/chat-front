@@ -13,11 +13,11 @@ import { UNKNOW_ERROR_MESSAGE } from '../../../constants/error';
 import router from '../../Routes';
 
 interface ChatListAddProps {
-  isOpen: boolean;
+  open: boolean;
   handleClose: () => void;
 }
 
-export const ChatListAdd = ({ isOpen, handleClose }: ChatListAddProps) => {
+export const ChatListAdd = ({ open, handleClose }: ChatListAddProps) => {
   const [error, setError] = useState('');
   const [chatName, setChatName] = useState('');
   const [createChat] = useCreateChat();
@@ -29,7 +29,7 @@ export const ChatListAdd = ({ isOpen, handleClose }: ChatListAddProps) => {
   };
 
   return (
-    <Modal open={isOpen} onClose={onClose}>
+    <Modal open={open} onClose={onClose}>
       <Box
         sx={{
           position: 'absolute',
@@ -73,7 +73,7 @@ export const ChatListAdd = ({ isOpen, handleClose }: ChatListAddProps) => {
                   },
                 });
                 onClose();
-                router.navigate(`/chat/${chat.data?.createChat._id}`);
+                router.navigate(`/chats/${chat.data?.createChat._id}`);
               } catch (error) {
                 setError(UNKNOW_ERROR_MESSAGE);
               }

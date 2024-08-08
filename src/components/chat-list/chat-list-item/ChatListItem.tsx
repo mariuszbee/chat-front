@@ -1,25 +1,25 @@
-import React from 'react';
 import ListItem from '@mui/material/ListItem';
 import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
-import { ListItemButton } from '@mui/material';
+import { Box, ListItemButton } from '@mui/material';
 import router from '../../Routes';
 import { Chat } from '../../../gql/graphql';
+import './ChatListItem.css';
 
 interface ChatListItemProps {
   chat: Chat;
   selected: boolean;
 }
 
-export const CHatListItem = ({ chat, selected }: ChatListItemProps) => {
+export const ChatListItem = ({ chat, selected }: ChatListItemProps) => {
   return (
     <>
       <ListItem alignItems="flex-start" disablePadding>
         <ListItemButton
-          onClick={() => router.navigate(`/chat/${chat._id}`)}
+          onClick={() => router.navigate(`/chats/${chat._id}`)}
           selected={selected}
         >
           <ListItemAvatar>
@@ -28,7 +28,13 @@ export const CHatListItem = ({ chat, selected }: ChatListItemProps) => {
           <ListItemText
             primary={chat.name}
             secondary={
-              <React.Fragment>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  gap: '0.5rem',
+                }}
+              >
                 <Typography
                   sx={{ display: 'inline' }}
                   component="span"
@@ -37,13 +43,15 @@ export const CHatListItem = ({ chat, selected }: ChatListItemProps) => {
                 >
                   {chat.latestMessage?.user.username || ''}
                 </Typography>
-                {' ' + (chat.latestMessage?.content || '')}
-              </React.Fragment>
+                <div className="content">
+                  {' ' + (chat.latestMessage?.content || '')}
+                </div>
+              </Box>
             }
           />
         </ListItemButton>
       </ListItem>
-      <Divider variant="inset" component="li" />
+      <Divider variant="inset" />
     </>
   );
 };
