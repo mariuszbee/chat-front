@@ -7,7 +7,7 @@ import { excludedRoutes } from './excluded-routes';
 import { onLogout } from '../utils/logout';
 import { createClient } from 'graphql-ws';
 import { getMainDefinition } from '@apollo/client/utilities';
-import { get } from 'http';
+
 import { getToken } from '../utils/token';
 
 const logOutLink = onError((error) => {
@@ -26,7 +26,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      autorization: getToken(),
+      authorization: getToken(),
     },
   };
 });
@@ -35,7 +35,7 @@ const httpLink = new HttpLink({ uri: `${API_URL}/graphql` });
 
 const wsLink = new GraphQLWsLink(
   createClient({
-    url: `ws://${WS_URL}/graphql`,
+    url: `${WS_URL}/graphql`,
     connectionParams: {
       token: getToken(),
     },
